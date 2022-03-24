@@ -1,10 +1,19 @@
 import './App.css';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 function App() {
   const toDoList = useSelector((state) => state.toDoList);
+  const dispatch = useDispatch();
 
-  let showList = toDoList.map((el) => <li key={el}>{el}</li>);
+  const deleteHandler = (el) => {
+    dispatch({ type: 'REMOVE', payload: el });
+  };
+
+  let showList = toDoList.map((el) => (
+    <li key={el} onClick={() => deleteHandler(el)}>
+      {el}
+    </li>
+  ));
   return (
     <div className="App">
       <ul>{showList.length === 0 ? 'Please enter your activity' : showList}</ul>
