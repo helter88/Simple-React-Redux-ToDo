@@ -12,7 +12,12 @@ function App() {
   };
 
   const activityHandler = (e) => {
-    console.log(e.target.value);
+    setActivity(e.target.value);
+  };
+
+  const addActivityHandler = () => {
+    dispatch({ type: 'ADD', payload: activity });
+    setActivity('');
   };
 
   let showList = toDoList.map((el) => (
@@ -27,8 +32,11 @@ function App() {
         type="text"
         placeholder="You can write your activity here:"
         onChange={activityHandler}
+        value={activity}
       />
-      <button type="button">Add to list</button>
+      <button type="button" onClick={addActivityHandler}>
+        Add to list
+      </button>
       <ul>{showList.length === 0 ? 'Please enter your activity' : showList}</ul>
     </div>
   );
